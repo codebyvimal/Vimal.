@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vimal — Developer & Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #f9f6f1;
+    --bg-alt:   #f2ede5;
+    --bg-card:  #ffffff;
+    --text:     #1c1917;
+    --muted:    #78716c;
+    --green:    #5c6b3e;
+    --border:   #e5e0d8;
+    --tag-bg:   #ede9e3;
+    --tag-text: #44403c;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+    max-width: 100%;
+  }
+  .nav-name { font-family: 'Lora', serif; font-weight: 700; font-size: 20px; color: var(--text); text-decoration: none; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* SECTIONS */
+  section { padding: 80px 24px; }
+  .inner { max-width: 780px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 12px; font-family: 'DM Sans', sans-serif;
+  }
+
+  h1 { font-family: 'Lora', serif; font-size: 52px; font-weight: 700; line-height: 1.15; }
+  h2 { font-family: 'Lora', serif; font-size: 36px; font-weight: 700; line-height: 1.2; }
+  h3 { font-family: 'Lora', serif; font-size: 20px; font-weight: 600; }
+
+  p { color: var(--muted); font-size: 17px; line-height: 1.75; margin-top: 12px; }
+
+  /* BUTTONS */
+  .btn-row { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 12px 24px; border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+    text-decoration: none; cursor: pointer; transition: all 0.2s;
+    border: none;
+  }
+  .btn-primary { background: var(--green); color: #fff; }
+  .btn-primary:hover { background: #1e2b1e; }
+  .btn-secondary { background: var(--bg-card); color: var(--text); border: 1px solid var(--border); }
+  .btn-secondary:hover { background: var(--border); }
+
+  /* HERO */
+  #hero { background: var(--bg); padding-top: 100px; padding-bottom: 100px; }
+  #hero h1 { max-width: 620px; }
+  #hero p { max-width: 520px; font-size: 18px; margin-top: 16px; }
+
+  .building-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 999px; padding: 6px 14px 6px 10px;
+    font-size: 13px; color: var(--muted); margin-bottom: 24px;
+  }
+  .building-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--green); flex-shrink: 0;
+    animation: pulse 2s infinite;
+  }
+  .building-pill strong { color: var(--text); font-weight: 500; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+  .now-learning { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
+  .now-learning-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .learning-items { display: flex; gap: 8px; flex-wrap: wrap; }
+  .learning-item {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 6px 12px; font-size: 13px; color: var(--text);
+  }
+  .learning-item span { font-size: 11px; color: var(--muted); }
+
+  #github { background: var(--bg-alt); padding: 60px 24px; }
+  .github-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+  .github-grid img { width: 100%; border-radius: 10px; border: 1px solid var(--border); display: block; }
+  .github-streak { grid-column: 1 / -1; }
+  @media (max-width: 640px) { .github-grid { grid-template-columns: 1fr; } }
+
+  /* ABOUT */
+  #about { background: var(--bg-alt); }
+  .about-grid { display: grid; grid-template-columns: 160px 1fr; gap: 48px; align-items: start; margin-top: 32px; }
+  .photo-circle {
+    width: 160px; height: 160px; border-radius: 50%;
+    background: #2a3320;
+    border: 3px solid var(--border); flex-shrink: 0;
+    object-fit: cover;
+  }
+  .about-text p + p { margin-top: 14px; }
+
+  /* PROJECTS */
+  #projects { background: var(--bg); }
+  #projects-ai { background: var(--bg-alt); }
+  .section-desc { color: var(--muted); font-size: 15px; margin-top: 8px; margin-bottom: 32px; }
+
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .card {
+    background: var(--bg-card); border-radius: 14px;
+    padding: 24px; border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+  .card h3 { margin-bottom: 8px; font-size: 18px; }
+  .card p { font-size: 14px; margin-top: 0; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .tag {
+    background: var(--tag-bg); color: var(--tag-text);
+    border-radius: 999px; font-size: 12px; padding: 4px 12px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .tag-ai { background: #e8eddc; color: #5c6b3e; }
+  .card-links { display: flex; gap: 12px; margin-top: 16px; }
+  .card-link { font-size: 13px; color: var(--green); text-decoration: none; font-weight: 500; }
+  .card-link:hover { text-decoration: underline; }
+
+  /* BLOG */
+  #blog { background: var(--bg); }
+  .blog-card {
+    background: var(--bg-card); border-radius: 14px;
+    padding: 24px 28px; border: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 12px; transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+  }
+  .blog-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+  .blog-meta { font-size: 12px; color: var(--muted); margin-bottom: 6px; display: flex; gap: 10px; align-items: center; }
+  .blog-title { font-family: 'Lora', serif; font-size: 18px; font-weight: 600; color: var(--text); }
+  .blog-excerpt { font-size: 14px; color: var(--muted); margin-top: 4px; }
+  .blog-arrow { color: var(--green); font-size: 18px; flex-shrink: 0; margin-left: 20px; }
+
+  /* CONTACT */
+  #contact { background: #2a3320; }
+  #contact h2 { color: #fff; }
+  #contact p { color: rgba(255,255,255,0.65); }
+  .contact-links { display: flex; gap: 16px; margin-top: 28px; flex-wrap: wrap; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.25); color: #fff;
+    font-size: 14px; text-decoration: none; transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.1); }
+
+  /* FOOTER */
+  footer {
+    background: #2a3320; text-align: center;
+    padding: 20px 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 13px; color: rgba(255,255,255,0.4);
+  }
+
+  /* FADE IN */
+  .fade { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 34px; }
+    h2 { font-size: 26px; }
+    section { padding: 56px 20px; }
+    .cards { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .photo-circle { margin: 0 auto; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-name" href="#">Vimal</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#blog">Blog</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="inner fade">
+    <div class="building-pill">
+      <div class="building-dot"></div>
+      Currently building: <strong>StudyGate — a focus app for Android</strong>
+    </div>
+    <h1>Student by day.<br>Builder by night.</h1>
+    <p>If I wish it existed, I build it. That's how I learn. That's how I grow.</p>
+    <div class="btn-row">
+      <a href="#projects" class="btn btn-primary">See my work</a>
+      <a href="#blog" class="btn btn-secondary">Read my blog</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="inner fade">
+    <div class="section-label">About</div>
+    <h2>Who I am.</h2>
+    <div class="about-grid">
+      <img src="Pasted%20image.png" alt="Vimal" class="photo-circle" style="object-fit: cover;">
+      <div class="about-text">
+        <p>I'm a second-year CS student at Vels University, Chennai, currently building a startup from my hostel room and learning everything I can get my hands on.</p>
+        <p>I make projects for two reasons — to solve real problems, and because I'm genuinely curious about how things work. Sometimes I build from scratch, sometimes I use AI as a collaborator.</p>
+        <p>When I'm not coding, I'm writing, listening to film music, or deep in a story-based game.</p>
+        <div class="now-learning">
+          <div class="now-learning-label">Up next</div>
+          <div class="learning-items">
+            <div class="learning-item">Web Development <span>· Learning</span></div>
+            <div class="learning-item">Machine Learning <span>· Exploring</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="inner fade">
+    <div class="section-label">Skills</div>
+    <h2>What I do.</h2>
+    <div class="cards" style="margin-top: 32px;">
+      <div class="card">
+        <h3>Technical</h3>
+        <ul style="list-style: none; padding: 0; color: var(--muted); font-size: 15px; margin-top: 12px; line-height: 1.8;">
+          <li>&bull; Python</li>
+          <li>&bull; Git &amp; GitHub</li>
+          <li>&bull; VS Code, Linux/Ubuntu</li>
+          <li>&bull; Web (HTML/CSS/JS)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Thinking &amp; Research</h3>
+        <ul style="list-style: none; padding: 0; color: var(--muted); font-size: 15px; margin-top: 12px; line-height: 1.8;">
+          <li>&bull; Problem solving &amp; first-principles</li>
+          <li>&bull; Research &amp; asking the right questions</li>
+          <li>&bull; Prompt engineering</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Startup &amp; Communication</h3>
+        <ul style="list-style: none; padding: 0; color: var(--muted); font-size: 15px; margin-top: 12px; line-height: 1.8;">
+          <li>&bull; Product thinking</li>
+          <li>&bull; Technical writing &amp; content</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS — BUILT BY ME -->
+<section id="projects">
+  <div class="inner fade">
+    <div class="section-label">Projects</div>
+    <h2>Built by me.</h2>
+    <p class="section-desc">Things I thought about, struggled with, and shipped.</p>
+    <div class="cards" style="grid-template-columns: 1fr;">
+      <div class="card" style="display:flex;align-items:center;justify-content:center;min-height:160px;">
+        <p style="font-style:italic;text-align:center;font-size:14px;">Currently under construction...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS — BUILT WITH AI -->
+<section id="projects-ai">
+  <div class="inner fade">
+    <div class="section-label">Projects</div>
+    <h2>Built with AI.</h2>
+    <p class="section-desc">Curiosity-driven experiments where I used AI as the builder.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>Eakalaiva Dualingo</h3>
+        <p>A fun gamified language learning experiment built with AI tools.</p>
+        <div class="tags">
+          <span class="tag tag-ai">✦ AI-assisted</span>
+          <span class="tag">Web</span>
+        </div>
+        <div class="card-links">
+          <a href="https://codebyvimal.github.io/eakalaiva-dualingo/" target="_blank" class="card-link">Visit Site →</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Portfolio — Early Version</h3>
+        <p>An early version of my portfolio, built with a focus on SEO.</p>
+        <div class="tags">
+          <span class="tag tag-ai">✦ AI-assisted</span>
+          <span class="tag">Web</span>
+        </div>
+        <div class="card-links">
+          <a href="https://codebyvimal.github.io/" target="_blank" class="card-link">Visit Site →</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Portfolio V1</h3>
+        <p>An earlier generative exploration of portfolio UI designs using AI.</p>
+        <div class="tags">
+          <span class="tag tag-ai">✦ AI-assisted</span>
+          <span class="tag">Web</span>
+        </div>
+        <div class="card-links">
+          <a href="https://codebyvimal.github.io/Portfolio/" target="_blank" class="card-link">Visit Site →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="inner fade">
+    <div class="section-label">Writing</div>
+    <h2>Writing.</h2>
+    <div class="cards" style="grid-template-columns: 1fr; margin-top: 24px;">
+      <div class="card" style="display:flex;align-items:center;justify-content:center;min-height:140px;">
+        <p style="font-style:italic;text-align:center;font-size:14px;">Posting soon...</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GITHUB ACTIVITY -->
+<section id="github">
+  <div class="inner fade">
+    <div class="section-label">GitHub Activity</div>
+    <h2>On the keyboard.</h2>
+    <div class="github-grid">
+      <img src="https://github-readme-stats.vercel.app/api?username=codebyvimal&show_icons=true&hide_border=true&bg_color=ffffff&title_color=2a3320&icon_color=5c6b3e&text_color=44403c&hide=stars" alt="GitHub Stats" style="grid-column: 1 / -1;" />
+      <img class="github-streak" src="https://streak-stats.demolab.com?user=codebyvimal&hide_border=true&background=ffffff&ring=5c6b3e&fire=5c6b3e&currStreakLabel=2a3320&sideLabels=78716c&dates=78716c&currStreakNum=1c1917&sideNums=1c1917" alt="GitHub Streak" />
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner fade">
+    <h2>Let's talk.</h2>
+    <p>I'm always open to interesting conversations, collaborations, or just someone who wants to geek out about something.</p>
+    <div class="contact-links">
+      <a href="https://github.com/codebyvimal" target="_blank" class="contact-link">GitHub</a>
+      <a href="#" class="contact-link">LinkedIn</a>
+      <a href="#" class="contact-link">Email</a>
+    </div>
+  </div>
+</section>
+
+<footer>Built by Vimal · 2025</footer>
+
+<script>
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
